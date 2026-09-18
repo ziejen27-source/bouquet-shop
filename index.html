@@ -1,0 +1,608 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Crochet Graduation Bouquet — Preorder</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #FAF6EE;
+    --card: #FFFFFF;
+    --ink: #2E2A24;
+    --ink-soft: #6B6355;
+    --sage: #7C8B6F;
+    --sage-deep: #5C6B4F;
+    --rose: #C97B84;
+    --mustard: #D6A64C;
+    --line: #E4DCC9;
+    --focus: #5C6B4F;
+  }
+  :root:not([data-theme="light"]) {
+    @media (prefers-color-scheme: dark) {
+      --cream: #211F1A;
+      --card: #2A2721;
+      --ink: #F2ECE0;
+      --ink-soft: #B9AF9C;
+      --sage: #9AAB8B;
+      --sage-deep: #B7C6A8;
+      --rose: #DE97A0;
+      --mustard: #E6BC6E;
+      --line: #43402F;
+      --focus: #B7C6A8;
+    }
+  }
+  :root[data-theme="dark"] {
+    --cream: #211F1A;
+    --card: #2A2721;
+    --ink: #F2ECE0;
+    --ink-soft: #B9AF9C;
+    --sage: #9AAB8B;
+    --sage-deep: #B7C6A8;
+    --rose: #DE97A0;
+    --mustard: #E6BC6E;
+    --line: #43402F;
+    --focus: #B7C6A8;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: "Work Sans", system-ui, sans-serif;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3, .display {
+    font-family: "Fraunces", Georgia, serif;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    margin: 0;
+    color: var(--ink);
+  }
+  a { color: var(--sage-deep); }
+  .wrap {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 0 20px 80px;
+  }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    padding: 52px 0 28px;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 28px;
+    align-items: center;
+  }
+  @media (min-width: 640px) {
+    .hero { grid-template-columns: 1.1fr 0.9fr; padding-top: 64px; }
+  }
+  .eyebrow {
+    color: var(--rose);
+    font-size: 0.95rem;
+    margin-bottom: 10px;
+  }
+  .hero h1 {
+    font-size: clamp(2rem, 5vw, 2.75rem);
+    line-height: 1.08;
+  }
+  .hero p.lede {
+    color: var(--ink-soft);
+    font-size: 1.05rem;
+    max-width: 46ch;
+    margin-top: 14px;
+  }
+  .hero-art {
+    width: 100%;
+    max-width: 340px;
+    justify-self: center;
+  }
+  .hero-art svg { width: 100%; height: auto; display: block; }
+
+  .meta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 22px;
+  }
+  .pill {
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 7px 14px;
+    font-size: 0.88rem;
+    color: var(--ink-soft);
+    background: var(--card);
+  }
+
+  /* ---------- Sections ---------- */
+  section.block { padding: 30px 0; border-top: 1px solid var(--line); }
+  section.block h2 { font-size: 1.35rem; margin-bottom: 6px; }
+  section.block .sub { color: var(--ink-soft); font-size: 0.95rem; margin-bottom: 18px; }
+
+  /* size cards */
+  .sizes {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 12px;
+  }
+  .size-card {
+    border: 1.5px solid var(--line);
+    border-radius: 14px;
+    padding: 16px;
+    cursor: pointer;
+    background: var(--card);
+    transition: border-color .15s ease, transform .1s ease;
+  }
+  .size-card:hover { border-color: var(--sage); }
+  .size-card.selected { border-color: var(--sage-deep); box-shadow: 0 0 0 1.5px var(--sage-deep) inset; }
+  .size-card .name { font-family: "Fraunces", serif; font-size: 1.05rem; }
+  .size-card .desc { color: var(--ink-soft); font-size: 0.85rem; margin: 4px 0 10px; }
+  .size-card .price { font-size: 1.1rem; color: var(--sage-deep); font-weight: 600; }
+
+  /* palette swatches */
+  .palettes { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px,1fr)); gap: 12px; }
+  .palette-card {
+    border: 1.5px solid var(--line);
+    border-radius: 14px;
+    padding: 14px;
+    cursor: pointer;
+    background: var(--card);
+  }
+  .palette-card.selected { border-color: var(--sage-deep); box-shadow: 0 0 0 1.5px var(--sage-deep) inset; }
+  .swatches { display: flex; gap: 6px; margin-bottom: 8px; }
+  .swatch { width: 20px; height: 20px; border-radius: 50%; border: 1px solid rgba(0,0,0,0.08); }
+  .palette-card .name { font-size: 0.92rem; }
+
+  /* form */
+  label.field { display: block; margin-bottom: 16px; }
+  label.field .lbl { display: block; font-size: 0.88rem; color: var(--ink-soft); margin-bottom: 6px; }
+  input[type="text"], input[type="email"], input[type="tel"], input[type="date"], textarea, select {
+    width: 100%;
+    font-family: inherit;
+    font-size: 1rem;
+    padding: 11px 13px;
+    border-radius: 10px;
+    border: 1.5px solid var(--line);
+    background: var(--card);
+    color: var(--ink);
+  }
+  input:focus, textarea:focus, select:focus {
+    outline: none;
+    border-color: var(--focus);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--focus) 22%, transparent);
+  }
+  textarea { min-height: 90px; resize: vertical; }
+  .two-col { display: grid; grid-template-columns: 1fr; gap: 0 14px; }
+  @media (min-width: 520px) { .two-col { grid-template-columns: 1fr 1fr; } }
+
+  .radio-row { display: flex; gap: 10px; flex-wrap: wrap; }
+  .radio-chip {
+    border: 1.5px solid var(--line);
+    border-radius: 999px;
+    padding: 8px 16px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    background: var(--card);
+    color: var(--ink);
+  }
+  .radio-chip.selected { border-color: var(--sage-deep); background: color-mix(in srgb, var(--sage) 14%, var(--card)); }
+
+  .ribbon-toggle {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+  .switch {
+    width: 40px; height: 24px; border-radius: 999px;
+    background: var(--line); position: relative; cursor: pointer; flex: none;
+    transition: background .15s ease;
+  }
+  .switch.on { background: var(--sage-deep); }
+  .switch .dot {
+    position: absolute; top: 3px; left: 3px;
+    width: 18px; height: 18px; border-radius: 50%;
+    background: var(--card); transition: transform .15s ease;
+  }
+  .switch.on .dot { transform: translateX(16px); }
+
+  .summary {
+    background: var(--card);
+    border: 1.5px solid var(--line);
+    border-radius: 14px;
+    padding: 16px 18px;
+    margin: 18px 0 22px;
+    font-size: 0.94rem;
+    color: var(--ink-soft);
+  }
+  .summary b { color: var(--ink); }
+  .summary .total { color: var(--sage-deep); font-size: 1.15rem; font-family: "Fraunces", serif; }
+
+  button.submit {
+    width: 100%;
+    padding: 15px;
+    border-radius: 12px;
+    border: none;
+    background: var(--sage-deep);
+    color: var(--cream);
+    font-family: "Fraunces", serif;
+    font-size: 1.05rem;
+    cursor: pointer;
+    transition: opacity .15s ease;
+  }
+  button.submit:hover { opacity: 0.92; }
+  button.submit:disabled { opacity: 0.55; cursor: not-allowed; }
+  .error-text { color: var(--rose); font-size: 0.85rem; margin-top: -8px; margin-bottom: 14px; display: none; }
+
+  .confirm {
+    text-align: center;
+    padding: 50px 20px;
+  }
+  .confirm .stem svg { width: 120px; margin-bottom: 10px; }
+  .confirm h2 { font-size: 1.6rem; }
+  .confirm p { color: var(--ink-soft); max-width: 40ch; margin: 10px auto 0; }
+  .confirm .order-id { font-size: 0.82rem; color: var(--ink-soft); margin-top: 18px; }
+
+  footer.note {
+    text-align: center;
+    color: var(--ink-soft);
+    font-size: 0.85rem;
+    padding-top: 10px;
+  }
+
+  .hidden { display: none !important; }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <div class="hero">
+    <div>
+      <div class="eyebrow">Made-to-order, one stitch at a time</div>
+      <h1>A crochet bouquet that lasts long after the tassel does.</h1>
+      <p class="lede">Handmade flowers for someone who just finished something hard. Pick a size and palette, tell me about your grad, and I'll have it ready by the date you need.</p>
+      <div class="meta-row">
+        <span class="pill">Ready in 1–2 weeks</span>
+        <span class="pill">Local pickup or shipped</span>
+        <span class="pill">Never wilts</span>
+      </div>
+    </div>
+    <div class="hero-art" aria-hidden="true">
+      <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+        <g stroke="var(--sage-deep)" stroke-width="4" fill="none" stroke-linecap="round">
+          <path d="M150 300 L150 150"/>
+          <path d="M150 220 L110 190"/>
+          <path d="M150 190 L195 165"/>
+        </g>
+        <!-- flower 1: rose -->
+        <g transform="translate(150,110)">
+          <circle r="16" fill="var(--rose)"/>
+          <circle r="16" cx="18" cy="6" fill="var(--rose)" opacity="0.9"/>
+          <circle r="16" cx="-18" cy="6" fill="var(--rose)" opacity="0.9"/>
+          <circle r="16" cx="10" cy="-16" fill="var(--rose)" opacity="0.85"/>
+          <circle r="16" cx="-10" cy="-16" fill="var(--rose)" opacity="0.85"/>
+          <circle r="9" fill="var(--mustard)"/>
+        </g>
+        <!-- flower 2: sage -->
+        <g transform="translate(108,178)">
+          <circle r="12" fill="var(--sage)"/>
+          <circle r="12" cx="14" cy="4" fill="var(--sage)" opacity="0.9"/>
+          <circle r="12" cx="-14" cy="4" fill="var(--sage)" opacity="0.9"/>
+          <circle r="12" cx="7" cy="-12" fill="var(--sage)" opacity="0.85"/>
+          <circle r="12" cx="-7" cy="-12" fill="var(--sage)" opacity="0.85"/>
+          <circle r="6" fill="var(--mustard)"/>
+        </g>
+        <!-- flower 3: mustard -->
+        <g transform="translate(200,150)">
+          <circle r="13" fill="var(--mustard)"/>
+          <circle r="13" cx="15" cy="5" fill="var(--mustard)" opacity="0.9"/>
+          <circle r="13" cx="-15" cy="5" fill="var(--mustard)" opacity="0.9"/>
+          <circle r="13" cx="8" cy="-13" fill="var(--mustard)" opacity="0.85"/>
+          <circle r="13" cx="-8" cy="-13" fill="var(--mustard)" opacity="0.85"/>
+          <circle r="7" fill="var(--rose)"/>
+        </g>
+        <!-- wrap -->
+        <path d="M110 230 Q150 260 190 230 L175 300 Q150 285 125 300 Z" fill="var(--card)" stroke="var(--line)" stroke-width="2"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- FORM VIEW -->
+  <div id="formView">
+
+    <section class="block">
+      <h2>Choose a size</h2>
+      <div class="sub">Stem count is approximate — every bouquet is a little different by hand.</div>
+      <div class="sizes" id="sizeOptions"></div>
+    </section>
+
+    <section class="block">
+      <h2>Choose a palette</h2>
+      <div class="sub">Pick a starting point — you can fine-tune colors in the notes below.</div>
+      <div class="palettes" id="paletteOptions"></div>
+    </section>
+
+    <section class="block">
+      <h2>Add a keepsake ribbon</h2>
+      <div class="sub">A small tag tied to the stems with a message or the grad's name and year.</div>
+      <div class="ribbon-toggle">
+        <div class="switch" id="ribbonSwitch"><div class="dot"></div></div>
+        <span id="ribbonLabel">No ribbon</span>
+      </div>
+      <label class="field hidden" id="ribbonTextWrap">
+        <span class="lbl">Ribbon text (max 40 characters)</span>
+        <input type="text" id="ribbonText" maxlength="40" placeholder="Congrats, Maya! Class of 2026" />
+      </label>
+    </section>
+
+    <section class="block">
+      <h2>Who's it for</h2>
+      <div class="two-col">
+        <label class="field">
+          <span class="lbl">Graduate's name</span>
+          <input type="text" id="gradName" placeholder="Maya Torres" />
+        </label>
+        <label class="field">
+          <span class="lbl">Their school or program (optional)</span>
+          <input type="text" id="gradSchool" placeholder="UC Davis, Class of 2026" />
+        </label>
+      </div>
+    </section>
+
+    <section class="block">
+      <h2>Pickup or shipping</h2>
+      <div class="radio-row" id="fulfillOptions"></div>
+      <label class="field" style="margin-top:16px;">
+        <span class="lbl">Needed by (graduation date)</span>
+        <input type="date" id="neededBy" />
+      </label>
+    </section>
+
+    <section class="block">
+      <h2>Your details</h2>
+      <div class="two-col">
+        <label class="field">
+          <span class="lbl">Your name</span>
+          <input type="text" id="buyerName" placeholder="Jordan Lee" />
+        </label>
+        <label class="field">
+          <span class="lbl">Email</span>
+          <input type="email" id="buyerEmail" placeholder="jordan@email.com" />
+        </label>
+      </div>
+      <label class="field">
+        <span class="lbl">Phone (optional)</span>
+        <input type="tel" id="buyerPhone" placeholder="(555) 123-4567" />
+      </label>
+      <label class="field" id="addressWrap">
+        <span class="lbl">Shipping address</span>
+        <textarea id="address" placeholder="Street, city, state, ZIP"></textarea>
+      </label>
+      <label class="field">
+        <span class="lbl">Anything else? (color tweaks, allergies to worry about, etc.)</span>
+        <textarea id="notes" placeholder="Optional"></textarea>
+      </label>
+    </section>
+
+    <div class="summary" id="summaryBox">Pick a size and palette to see your total.</div>
+    <div class="error-text" id="errorText">Please fill in the graduate's name, your name, email, and needed-by date.</div>
+    <button class="submit" id="submitBtn">Place preorder</button>
+    <footer class="note">You won't be charged here — I'll follow up by email to confirm details and arrange payment.</footer>
+  </div>
+
+  <!-- CONFIRMATION VIEW -->
+  <div id="confirmView" class="confirm hidden">
+    <div class="stem">
+      <svg viewBox="0 0 200 140" xmlns="http://www.w3.org/2000/svg">
+        <g transform="translate(100,60)">
+          <circle r="15" fill="var(--rose)"/>
+          <circle r="15" cx="17" cy="5" fill="var(--rose)" opacity="0.9"/>
+          <circle r="15" cx="-17" cy="5" fill="var(--rose)" opacity="0.9"/>
+          <circle r="15" cx="9" cy="-15" fill="var(--rose)" opacity="0.85"/>
+          <circle r="15" cx="-9" cy="-15" fill="var(--rose)" opacity="0.85"/>
+          <circle r="8" fill="var(--mustard)"/>
+        </g>
+      </svg>
+    </div>
+    <h2>Order received!</h2>
+    <p>Thanks — I'll email you within a couple of days to confirm details and sort out payment before I start stitching.</p>
+    <div class="order-id" id="orderIdText"></div>
+  </div>
+
+</div>
+
+<script>
+(function () {
+  const sizes = [
+    { id: "small", name: "Petite", desc: "6 stems, single wrap", price: 32 },
+    { id: "medium", name: "Classic", desc: "10 stems, ribbon wrap", price: 48 },
+    { id: "large", name: "Grand", desc: "16 stems, paper + ribbon", price: 68 }
+  ];
+  const palettes = [
+    { id: "school", name: "School colors", colors: ["#7C8B6F","#D6A64C"] },
+    { id: "pastel", name: "Soft pastel", colors: ["#E7C6C9","#CFE0C3","#F1E3B0"] },
+    { id: "sunset", name: "Sunset warm", colors: ["#C97B84","#D6A64C","#B85C3E"] },
+    { id: "custom", name: "Custom (describe in notes)", colors: ["#E4DCC9"] }
+  ];
+  const fulfillments = [
+    { id: "pickup", name: "Local pickup" },
+    { id: "delivery", name: "Local delivery" },
+    { id: "ship", name: "Shipping" }
+  ];
+
+  let state = { size: null, palette: null, ribbon: false, fulfill: null };
+
+  const sizeWrap = document.getElementById("sizeOptions");
+  sizes.forEach(s => {
+    const el = document.createElement("div");
+    el.className = "size-card";
+    el.innerHTML = `<div class="name">${s.name}</div><div class="desc">${s.desc}</div><div class="price">$${s.price}</div>`;
+    el.addEventListener("click", () => {
+      state.size = s;
+      [...sizeWrap.children].forEach(c => c.classList.remove("selected"));
+      el.classList.add("selected");
+      updateSummary();
+    });
+    sizeWrap.appendChild(el);
+  });
+
+  const paletteWrap = document.getElementById("paletteOptions");
+  palettes.forEach(p => {
+    const el = document.createElement("div");
+    el.className = "palette-card";
+    const swatches = p.colors.map(c => `<div class="swatch" style="background:${c}"></div>`).join("");
+    el.innerHTML = `<div class="swatches">${swatches}</div><div class="name">${p.name}</div>`;
+    el.addEventListener("click", () => {
+      state.palette = p;
+      [...paletteWrap.children].forEach(c => c.classList.remove("selected"));
+      el.classList.add("selected");
+      updateSummary();
+    });
+    paletteWrap.appendChild(el);
+  });
+
+  const fulfillWrap = document.getElementById("fulfillOptions");
+  const addressWrap = document.getElementById("addressWrap");
+  fulfillments.forEach(f => {
+    const el = document.createElement("div");
+    el.className = "radio-chip";
+    el.textContent = f.name;
+    el.addEventListener("click", () => {
+      state.fulfill = f;
+      [...fulfillWrap.children].forEach(c => c.classList.remove("selected"));
+      el.classList.add("selected");
+      addressWrap.classList.toggle("hidden", f.id !== "ship");
+      updateSummary();
+    });
+    fulfillWrap.appendChild(el);
+  });
+  addressWrap.classList.add("hidden");
+
+  const ribbonSwitch = document.getElementById("ribbonSwitch");
+  const ribbonLabel = document.getElementById("ribbonLabel");
+  const ribbonTextWrap = document.getElementById("ribbonTextWrap");
+  ribbonSwitch.addEventListener("click", () => {
+    state.ribbon = !state.ribbon;
+    ribbonSwitch.classList.toggle("on", state.ribbon);
+    ribbonLabel.textContent = state.ribbon ? "Ribbon added (+$4)" : "No ribbon";
+    ribbonTextWrap.classList.toggle("hidden", !state.ribbon);
+    updateSummary();
+  });
+
+  const summaryBox = document.getElementById("summaryBox");
+  function updateSummary() {
+    if (!state.size || !state.palette) {
+      summaryBox.textContent = "Pick a size and palette to see your total.";
+      return;
+    }
+    const total = state.size.price + (state.ribbon ? 4 : 0);
+    summaryBox.innerHTML = `<b>${state.size.name}</b> bouquet in <b>${state.palette.name}</b>${state.ribbon ? " with a ribbon" : ""} — <span class="total">$${total}</span> <span style="font-size:0.8em;">(+ shipping if applicable)</span>`;
+  }
+
+  const errorText = document.getElementById("errorText");
+  const submitBtn = document.getElementById("submitBtn");
+  const formView = document.getElementById("formView");
+  const confirmView = document.getElementById("confirmView");
+  const orderIdText = document.getElementById("orderIdText");
+
+  // ⚠️ If you're hosting this file yourself (not via a claude.ai artifact link),
+  // replace the address below with the email you want orders sent to.
+  const OWNER_EMAIL = "ziejen27@gmail.com";
+
+  let db = null;
+  let claudeAvailable = false;
+  if (typeof claude !== "undefined" && claude && typeof claude.use === "function") {
+    claudeAvailable = true;
+    claude.use("db").then(d => { db = d; }).catch(() => {});
+  }
+
+  function buildMailtoLink(order, orderId) {
+    const subject = encodeURIComponent(`New bouquet preorder — ${order.gradName}`);
+    const lines = [
+      `Order reference: ${orderId}`,
+      ``,
+      `Size: ${order.size} ($${order.sizePrice})`,
+      `Palette: ${order.palette}`,
+      `Ribbon: ${order.ribbon ? "Yes — " + (order.ribbonText || "(no text given)") : "No"}`,
+      `Total: $${order.total} (+ shipping if applicable)`,
+      ``,
+      `Graduate: ${order.gradName}${order.gradSchool ? " (" + order.gradSchool + ")" : ""}`,
+      `Needed by: ${order.neededBy}`,
+      `Fulfillment: ${order.fulfill}`,
+      order.address ? `Address: ${order.address}` : null,
+      ``,
+      `Buyer: ${order.buyerName}`,
+      `Email: ${order.buyerEmail}`,
+      order.buyerPhone ? `Phone: ${order.buyerPhone}` : null,
+      order.notes ? `Notes: ${order.notes}` : null
+    ].filter(Boolean).join("\n");
+    return `mailto:${OWNER_EMAIL}?subject=${subject}&body=${encodeURIComponent(lines)}`;
+  }
+
+  submitBtn.addEventListener("click", async () => {
+    const gradName = document.getElementById("gradName").value.trim();
+    const buyerName = document.getElementById("buyerName").value.trim();
+    const buyerEmail = document.getElementById("buyerEmail").value.trim();
+    const neededBy = document.getElementById("neededBy").value;
+
+    if (!state.size || !state.palette || !state.fulfill || !gradName || !buyerName || !buyerEmail || !neededBy) {
+      errorText.style.display = "block";
+      errorText.textContent = "Please choose a size, palette, delivery method, and fill in the graduate's name, your name, email, and needed-by date.";
+      return;
+    }
+    errorText.style.display = "none";
+    submitBtn.disabled = true;
+    submitBtn.textContent = "Placing order…";
+
+    const order = {
+      size: state.size.id,
+      sizePrice: state.size.price,
+      palette: state.palette.id,
+      ribbon: state.ribbon,
+      ribbonText: document.getElementById("ribbonText").value.trim(),
+      gradName,
+      gradSchool: document.getElementById("gradSchool").value.trim(),
+      fulfill: state.fulfill.id,
+      neededBy,
+      buyerName,
+      buyerEmail,
+      buyerPhone: document.getElementById("buyerPhone").value.trim(),
+      address: document.getElementById("address").value.trim(),
+      notes: document.getElementById("notes").value.trim(),
+      total: state.size.price + (state.ribbon ? 4 : 0),
+      submittedAt: new Date().toISOString()
+    };
+
+    const orderId = "ord_" + Date.now() + "_" + Math.random().toString(36).slice(2, 8);
+
+    let savedToDb = false;
+    try {
+      if (claudeAvailable && db) {
+        await db.doc("orders/" + orderId).set(order);
+        savedToDb = true;
+      }
+    } catch (e) {
+      console.error("Could not save order to shared storage:", e);
+    }
+
+    if (!savedToDb) {
+      // Not running on a claude.ai artifact link (or the save failed) — fall back
+      // to opening the buyer's email client with the order pre-filled to OWNER_EMAIL.
+      window.location.href = buildMailtoLink(order, orderId);
+    }
+
+    orderIdText.textContent = "Order reference: " + orderId;
+    formView.classList.add("hidden");
+    confirmView.classList.remove("hidden");
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+})();
+</script>
+
+</body>
+</html>
